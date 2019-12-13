@@ -50,3 +50,6 @@ SDカードを本体に挿す
 メニュー画面が表示されたらOK
 Wi-Fiの設定はWebサイトの通り
 
+// LEGO-EV3 ssh login
+$ ssh robot@172.20.10.4
+pass maker
