@@ -53,3 +53,7 @@ Wi-Fiの設定はWebサイトの通り
 // LEGO-EV3 ssh login
 $ ssh robot@172.20.10.4
 pass maker
+
+apt-get がエラー
+http://yakushi.shinshu-u.ac.jp/robotics/?EV3　で別イメージを試す
+ただし、SDカードが抜けない！
