@@ -1,0 +1,6 @@
+// シャットダウンコマンド
+shutdown now
+
+//reboot
+reboot
+
