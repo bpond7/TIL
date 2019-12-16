@@ -1,0 +1,8 @@
+// ROSでEV3を動かしたい
+https://qiita.com/mechamogera/items/504fcf57153086094ba2
+
+// はじめにEV3の開発環境試す
+// EV3でrpycを使う
+https://qiita.com/murotani/items/a48ea3bada15b57d4dfb
+https://qiita.com/murotani/items/543655f0ccab3b5b9fd2
+
