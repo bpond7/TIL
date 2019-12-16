@@ -21,3 +21,39 @@ git clone git@github.com:bpond7/raspimouse_ros.git
 
 // byobu入れてみた
 sudo apt-get install byobu
+
+// LEGO-EV3
+https://qiita.com/haneuma/items/a301186d832beee639d0
+http://afrel.co.jp/archives/16530
+https://openrtm.org/openrtm/ja/doc/casestudy/lego_mindstorm/lego_sdcard_prep
+https://www.ev3dev.org/downloads/
+ーPC側準備
+OSイメージをダウンロード
+ダウンロードしたファイルを展開する
+SDカードを挿す
+イメージファイルの書き込み
+$ sudo dd if=ev3dev-stretch-ev3-generic-2019-10-23.img of=/dev/sdb bs=1M
+
+※dd: failed to open '/dev/sdb': No medium found
+が出たら、SDカード抜き差しする（アンマウントしない）
+
+1800+0 records in
+1800+0 records out
+1887436800 bytes (1.9 GB, 1.8 GiB) copied, 46.0408 s, 41.0 MB/s
+が出たら書き込み終了
+
+ーEV3側準備
+電源ケーブルを本体に挿す
+Wi-Fiドングルを本体に挿す
+SDカードを本体に挿す
+本体真ん中のボタンを押して、起動する
+メニュー画面が表示されたらOK
+Wi-Fiの設定はWebサイトの通り
+
+// LEGO-EV3 ssh login
+$ ssh robot@172.20.10.4
+pass maker
+
+apt-get がエラー
+http://yakushi.shinshu-u.ac.jp/robotics/?EV3　で別イメージを試す
+ただし、SDカードが抜けない！
