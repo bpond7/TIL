@@ -4,3 +4,5 @@ shutdown now
 //reboot
 reboot
 
+//git
+git push origin master
