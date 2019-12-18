@@ -57,3 +57,19 @@ pass maker
 apt-get がエラー
 http://yakushi.shinshu-u.ac.jp/robotics/?EV3　で別イメージを試す
 ただし、SDカードが抜けない！
+->ピンセットで抜けるようになった
+
+// GUI inst
+// xubuntu desktop install
+sudo apt-get install -y install xubuntu-desktop
+
+// ROS practice
+sudo apt-get install -y ros-melodic-joystick-drivers
+sudo apt-get install -y ros-melodic-image-proc
+
+// kame
+sudo apt-get install ros-melodic-turtlesim
+$ roscore
+$ rosrun turtlesim turtlesim_node
+
+
