@@ -72,4 +72,7 @@ sudo apt-get install ros-melodic-turtlesim
 $ roscore
 $ rosrun turtlesim turtlesim_node
 
+// ワークスペース作成したら、bashを書き換えること
+vi ~/.bashrc
 
+source ~/.bashrc
