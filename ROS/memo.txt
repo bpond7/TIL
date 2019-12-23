@@ -94,6 +94,6 @@ xacro: in-order processing became default in ROS Melodic. You can drop the optio
 rosrun xacro xacro basic1.xacro  >basic1.urdf
 OK
 
-
+191223 -ROS73 xacro 6NG
 
 	
