@@ -74,5 +74,14 @@ $ rosrun turtlesim turtlesim_node
 
 // ワークスペース作成したら、bashを書き換えること
 vi ~/.bashrc
-
 source ~/.bashrc
+
+//rviz
+sudo apt-get install -y ros-melodic-urdf-tutorial
+check_urdf simple_body1.urdf 
+
+Command 'check_urdf' not found, but can be installed with:
+
+sudo apt install liburdfdom-tools
+
+	
