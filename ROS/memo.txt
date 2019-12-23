@@ -86,4 +86,14 @@ sudo apt install liburdfdom-tools
 
 // copy(folder)
 cp -r src dist
+
+//xacro
+rosrun xacro xacro basic1.xacro --inorder >basic1.urdf
+xacro: in-order processing became default in ROS Melodic. You can drop the option.
+
+rosrun xacro xacro basic1.xacro  >basic1.urdf
+OK
+
+
+
 	
