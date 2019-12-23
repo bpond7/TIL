@@ -84,4 +84,6 @@ Command 'check_urdf' not found, but can be installed with:
 
 sudo apt install liburdfdom-tools
 
+// copy(folder)
+cp -r src dist
 	
