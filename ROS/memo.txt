@@ -94,6 +94,11 @@ xacro: in-order processing became default in ROS Melodic. You can drop the optio
 rosrun xacro xacro basic1.xacro  >basic1.urdf
 OK
 
-191223 -ROS73 xacro 6NG
+//meld
+sudo apt-get install meld
+
+//xacro ex6
+//error
+roslaunch urdf_tutorial display.launch model:=basic6.xacro
 
 	
