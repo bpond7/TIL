@@ -105,4 +105,17 @@ roslaunch urdf_tutorial display.launch model:=basic6.xacro
 ctrl+q
 stty -a -> stop=^S
 stty stop undef
+
+// joint publish  -ROS Turtorial No 16
+ERROR
+catkin make -> NG
+listener??
+
+//12/25 -ROS Turtorial No 52
+sudo apt-get install ros-melodic-roswww
+
+page not disp....
+
+ 
+
 	
