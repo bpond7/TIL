@@ -101,4 +101,8 @@ sudo apt-get install meld
 //error
 roslaunch urdf_tutorial display.launch model:=basic6.xacro
 
+// ctrl+s
+ctrl+q
+stty -a -> stop=^S
+stty stop undef
 	
