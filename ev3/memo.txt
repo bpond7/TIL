@@ -6,3 +6,17 @@ https://qiita.com/mechamogera/items/504fcf57153086094ba2
 https://qiita.com/murotani/items/a48ea3bada15b57d4dfb
 https://qiita.com/murotani/items/543655f0ccab3b5b9fd2
 
+-error-
+Traceback (most recent call last):
+  File "rpyc_client2.py", line 3, in <module>
+    conn = rpyc.classic.connect('ev3dev')
+  File "/home/ubuntu/.local/lib/python2.7/site-packages/rpyc/utils/classic.py", line 75, in connect
+    return factory.connect(host, port, SlaveService, ipv6=ipv6, keepalive=keepalive)
+  File "/home/ubuntu/.local/lib/python2.7/site-packages/rpyc/utils/factory.py", line 98, in connect
+    s = SocketStream.connect(host, port, ipv6=ipv6, keepalive=keepalive)
+  File "/home/ubuntu/.local/lib/python2.7/site-packages/rpyc/core/stream.py", line 172, in connect
+    return cls(cls._connect(host, port, **kwargs))
+  File "/home/ubuntu/.local/lib/python2.7/site-packages/rpyc/core/stream.py", line 123, in _connect
+    socktype, proto)[0]
+socket.gaierror: [Errno -3] Temporary failure in name resolution
+
