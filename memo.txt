@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+// Git + VSCode
+https://gitforwindows.org/
+https://qiita.com/y-tsutsu/items/2ba96b16b220fb5913be
+https://blog.janjan.net/2018/07/11/visual-studio-code-remote-repository/
+=======
 // シャットダウンコマンド
 shutdown now
 
@@ -6,3 +12,4 @@ reboot
 
 //git
 git push origin master
+>>>>>>> origin/master
