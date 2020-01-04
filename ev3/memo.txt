@@ -20,3 +20,8 @@ Traceback (most recent call last):
     socktype, proto)[0]
 socket.gaierror: [Errno -3] Temporary failure in name resolution
 
+//pip install
+$ sudo apt install python-pip python3-pip
+
+//rpyc install
+$ pip install rpyc
