@@ -379,7 +379,7 @@ gtest_hide_internal_symbols:BOOL=OFF
 gtest_main_LIB_DEPENDS:STATIC=general;-lpthread;general;gtest;
 
 //Path to a library.
-lib:FILEPATH=/opt/ros/melodic/lib/libtf2.so
+lib:FILEPATH=/opt/ros/melodic/lib/libxmlrpcpp.so
 
 //The directory containing a CMake configuration file for message_filters.
 message_filters_DIR:PATH=/opt/ros/melodic/share/message_filters/cmake
@@ -389,6 +389,12 @@ message_generation_DIR:PATH=/opt/ros/melodic/share/message_generation/cmake
 
 //The directory containing a CMake configuration file for message_runtime.
 message_runtime_DIR:PATH=/opt/ros/melodic/share/message_runtime/cmake
+
+//Value Computed by CMake
+pimouse_ros_BINARY_DIR:STATIC=/home/ubuntu/catkin_ws/build/pimouse_ros
+
+//Value Computed by CMake
+pimouse_ros_SOURCE_DIR:STATIC=/home/ubuntu/catkin_ws/src/pimouse_ros
 
 //The directory containing a CMake configuration file for rosconsole.
 rosconsole_DIR:PATH=/opt/ros/melodic/share/rosconsole/cmake
@@ -443,6 +449,12 @@ vis_lecture_BINARY_DIR:STATIC=/home/ubuntu/catkin_ws/build/vis_lecture
 
 //Value Computed by CMake
 vis_lecture_SOURCE_DIR:STATIC=/home/ubuntu/catkin_ws/src/vis_lecture
+
+//Value Computed by CMake
+web_lecture_BINARY_DIR:STATIC=/home/ubuntu/catkin_ws/build/web_lecture
+
+//Value Computed by CMake
+web_lecture_SOURCE_DIR:STATIC=/home/ubuntu/catkin_ws/src/web_lecture
 
 //The directory containing a CMake configuration file for xmlrpcpp.
 xmlrpcpp_DIR:PATH=/opt/ros/melodic/share/xmlrpcpp/cmake
@@ -557,7 +569,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=7
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=9
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
@@ -599,7 +611,7 @@ CMAKE_UNAME:INTERNAL=/bin/uname
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 //Details about finding PythonInterp
-FIND_PACKAGE_MESSAGE_DETAILS_PythonInterp:INTERNAL=[/usr/bin/python2][v2.7.15()]
+FIND_PACKAGE_MESSAGE_DETAILS_PythonInterp:INTERNAL=[/usr/bin/python2][v2.7.17()]
 //Details about finding Threads
 FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 GMOCK_FROM_SOURCE_FOUND:INTERNAL=TRUE

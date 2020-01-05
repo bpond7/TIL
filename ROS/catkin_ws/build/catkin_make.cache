@@ -1,2 +1,2 @@
-beginner_tutorials:ros_lecture/basic_lecture:vis_lecture
+beginner_tutorials:pimouse_ros:ros_lecture/basic_lecture:vis_lecture:web_lecture
 -DCATKIN_DEVEL_PREFIX=/home/ubuntu/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/ubuntu/catkin_ws/install -G Unix Makefiles

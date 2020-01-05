@@ -7,4 +7,6 @@
 subdirs("gtest")
 subdirs("ros_lecture/basic_lecture")
 subdirs("beginner_tutorials")
+subdirs("pimouse_ros")
 subdirs("vis_lecture")
+subdirs("web_lecture")
