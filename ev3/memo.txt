@@ -6,6 +6,8 @@ https://qiita.com/mechamogera/items/504fcf57153086094ba2
 https://qiita.com/murotani/items/a48ea3bada15b57d4dfb
 https://qiita.com/murotani/items/543655f0ccab3b5b9fd2
 
+import rpyc
+conn = rpyc.classic.connect("ev3dev")
 -error-
 Traceback (most recent call last):
   File "rpyc_client2.py", line 3, in <module>
@@ -22,16 +24,59 @@ socket.gaierror: [Errno -3] Temporary failure in name resolution
 
 ->see rpyc reference
 #!/bin/bash
-python `which rpyc_classic.py` --host 0.0.0.0
-->INFO:SLAVE/18812:server started on [0.0.0.0]:18812 
+$ python `which rpyc_classic.py` --host 0.0.0.0
+INFO:SLAVE/18812:server started on [0.0.0.0]:18812 
+
+->change src
+import rpyc
+conn = rpyc.classic.connect("172.20.10.4")
+
+ev3 = conn.modules['ev3dev.ev3']
+-error-
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/ubuntu/.local/lib/python2.7/site-packages/rpyc/core/service.py", line 136, in __getitem__
+    self.__cache[name] = self.__getmodule(name)
+  File "/home/ubuntu/.local/lib/python2.7/site-packages/rpyc/core/netref.py", line 247, in __call__
+    return syncreq(_self, consts.HANDLE_CALL, args, kwargs)
+  File "/home/ubuntu/.local/lib/python2.7/site-packages/rpyc/core/netref.py", line 76, in syncreq
+    return conn.sync_request(handler, proxy, *args)
+  File "/home/ubuntu/.local/lib/python2.7/site-packages/rpyc/core/protocol.py", line 464, in sync_request
+    return self.async_request(handler, *args, timeout=timeout).value
+  File "/home/ubuntu/.local/lib/python2.7/site-packages/rpyc/core/async_.py", line 102, in value
+    raise self._obj
+ImportError: No module named ev3dev
+
+->try
+$ python
+>>> import  ev3dev.ev3
+NG
+$ python3
+>>> import ev3dev.ev3
+OK
+
+But sever is python2...
+
+->ev3 update
+sudo apt-get install --only-upgrade python3-ev3dev
 
 //pip install
 $ sudo apt install python-pip python3-pip
 
 //rpyc install
 $ pip install rpyc
+$ sudo apt-get install python3-rpyc
 
 //pip for ev3
 scp get_pip.py robot@ev3dev:/tmp
 python get_pip.py
+
+//pip3 install for ev3
+sudo apt install python3-pip
+
+// ubuntu
+$ pip3 install rpyc
+$ python3 `which rpyc_classic.py` --host 0.0.0.0
+->OK
+
 
