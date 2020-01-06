@@ -20,8 +20,18 @@ Traceback (most recent call last):
     socktype, proto)[0]
 socket.gaierror: [Errno -3] Temporary failure in name resolution
 
+->see rpyc reference
+#!/bin/bash
+python `which rpyc_classic.py` --host 0.0.0.0
+->INFO:SLAVE/18812:server started on [0.0.0.0]:18812 
+
 //pip install
 $ sudo apt install python-pip python3-pip
 
 //rpyc install
 $ pip install rpyc
+
+//pip for ev3
+scp get_pip.py robot@ev3dev:/tmp
+python get_pip.py
+
