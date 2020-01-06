@@ -1,4 +1,3 @@
 import rpyc
 
-conn = rpyc.classic.connect('ev3dev.local')
-ev3 = conn.modules['ev3dev.ev3']
+conn = rpyc.classic.connect('172.20.10.4')
