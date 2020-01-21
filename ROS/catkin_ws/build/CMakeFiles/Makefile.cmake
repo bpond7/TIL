@@ -267,6 +267,7 @@ set(CMAKE_DEPEND_INFO_FILES
   "gtest/googlemock/CMakeFiles/gmock.dir/DependInfo.cmake"
   "gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/DependInfo.cmake"
   "gtest/googlemock/gtest/CMakeFiles/gtest.dir/DependInfo.cmake"
+  "ros_lecture/basic_lecture/CMakeFiles/basic_twist_publisher.dir/DependInfo.cmake"
   "ros_lecture/basic_lecture/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/DependInfo.cmake"
   "ros_lecture/basic_lecture/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/DependInfo.cmake"
   "ros_lecture/basic_lecture/CMakeFiles/basic_simple_talker.dir/DependInfo.cmake"

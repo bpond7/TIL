@@ -168,6 +168,21 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
+ros_lecture/basic_lecture/CMakeFiles/basic_twist_publisher.dir/rule:
+	cd /home/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 ros_lecture/basic_lecture/CMakeFiles/basic_twist_publisher.dir/rule
+.PHONY : ros_lecture/basic_lecture/CMakeFiles/basic_twist_publisher.dir/rule
+
+# Convenience name for target.
+basic_twist_publisher: ros_lecture/basic_lecture/CMakeFiles/basic_twist_publisher.dir/rule
+
+.PHONY : basic_twist_publisher
+
+# fast build rule for target.
+basic_twist_publisher/fast:
+	cd /home/ubuntu/catkin_ws/build && $(MAKE) -f ros_lecture/basic_lecture/CMakeFiles/basic_twist_publisher.dir/build.make ros_lecture/basic_lecture/CMakeFiles/basic_twist_publisher.dir/build
+.PHONY : basic_twist_publisher/fast
+
+# Convenience name for target.
 ros_lecture/basic_lecture/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule:
 	cd /home/ubuntu/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 ros_lecture/basic_lecture/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
 .PHONY : ros_lecture/basic_lecture/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
@@ -476,6 +491,33 @@ src/basic_simple_talker.cpp.s:
 	cd /home/ubuntu/catkin_ws/build && $(MAKE) -f ros_lecture/basic_lecture/CMakeFiles/basic_simple_talker.dir/build.make ros_lecture/basic_lecture/CMakeFiles/basic_simple_talker.dir/src/basic_simple_talker.cpp.s
 .PHONY : src/basic_simple_talker.cpp.s
 
+src/basic_twist_publisher.o: src/basic_twist_publisher.cpp.o
+
+.PHONY : src/basic_twist_publisher.o
+
+# target to build an object file
+src/basic_twist_publisher.cpp.o:
+	cd /home/ubuntu/catkin_ws/build && $(MAKE) -f ros_lecture/basic_lecture/CMakeFiles/basic_twist_publisher.dir/build.make ros_lecture/basic_lecture/CMakeFiles/basic_twist_publisher.dir/src/basic_twist_publisher.cpp.o
+.PHONY : src/basic_twist_publisher.cpp.o
+
+src/basic_twist_publisher.i: src/basic_twist_publisher.cpp.i
+
+.PHONY : src/basic_twist_publisher.i
+
+# target to preprocess a source file
+src/basic_twist_publisher.cpp.i:
+	cd /home/ubuntu/catkin_ws/build && $(MAKE) -f ros_lecture/basic_lecture/CMakeFiles/basic_twist_publisher.dir/build.make ros_lecture/basic_lecture/CMakeFiles/basic_twist_publisher.dir/src/basic_twist_publisher.cpp.i
+.PHONY : src/basic_twist_publisher.cpp.i
+
+src/basic_twist_publisher.s: src/basic_twist_publisher.cpp.s
+
+.PHONY : src/basic_twist_publisher.s
+
+# target to generate assembly for a file
+src/basic_twist_publisher.cpp.s:
+	cd /home/ubuntu/catkin_ws/build && $(MAKE) -f ros_lecture/basic_lecture/CMakeFiles/basic_twist_publisher.dir/build.make ros_lecture/basic_lecture/CMakeFiles/basic_twist_publisher.dir/src/basic_twist_publisher.cpp.s
+.PHONY : src/basic_twist_publisher.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -488,6 +530,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... test"
+	@echo "... basic_twist_publisher"
 	@echo "... rosgraph_msgs_generate_messages_cpp"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... basic_simple_talker"
@@ -512,6 +555,9 @@ help:
 	@echo "... src/basic_simple_talker.o"
 	@echo "... src/basic_simple_talker.i"
 	@echo "... src/basic_simple_talker.s"
+	@echo "... src/basic_twist_publisher.o"
+	@echo "... src/basic_twist_publisher.i"
+	@echo "... src/basic_twist_publisher.s"
 .PHONY : help
 
 

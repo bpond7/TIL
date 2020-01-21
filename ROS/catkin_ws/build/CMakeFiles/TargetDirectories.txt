@@ -41,6 +41,7 @@
 /home/ubuntu/catkin_ws/build/ros_lecture/basic_lecture/CMakeFiles/rebuild_cache.dir
 /home/ubuntu/catkin_ws/build/ros_lecture/basic_lecture/CMakeFiles/edit_cache.dir
 /home/ubuntu/catkin_ws/build/ros_lecture/basic_lecture/CMakeFiles/test.dir
+/home/ubuntu/catkin_ws/build/ros_lecture/basic_lecture/CMakeFiles/basic_twist_publisher.dir
 /home/ubuntu/catkin_ws/build/ros_lecture/basic_lecture/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir
 /home/ubuntu/catkin_ws/build/ros_lecture/basic_lecture/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir
 /home/ubuntu/catkin_ws/build/ros_lecture/basic_lecture/CMakeFiles/basic_simple_talker.dir
