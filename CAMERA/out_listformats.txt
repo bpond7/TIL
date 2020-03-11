@@ -1,0 +1,16 @@
+ioctl: VIDIOC_ENUM_FMT
+	Index       : 0
+	Type        : Video Capture
+	Pixel Format: 'YUYV'
+	Name        : YUYV 4:2:2
+
+	Index       : 1
+	Type        : Video Capture
+	Pixel Format: 'H264' (compressed)
+	Name        : H.264
+
+	Index       : 2
+	Type        : Video Capture
+	Pixel Format: 'MJPG' (compressed)
+	Name        : Motion-JPEG
+
