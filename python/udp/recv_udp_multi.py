@@ -3,7 +3,7 @@ import socket
 from contextlib import closing
 
 def main():
-	local_address = '192.168.2.45'
+	local_address = '172.20.10.4'
 	multicast_group = '224.0.0.10'
 	port = 4000
 	bufsize = 4096
