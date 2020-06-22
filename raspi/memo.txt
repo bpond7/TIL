@@ -1,2 +1,10 @@
 //LED
 https://qiita.com/aryoa/items/3f6d82b8c63761cef087
+
+// CentOS install
+image
+https://wiki.centos.org/Download
+->Minimal image for RaspberryPi 2/3
+
+dd for windows
+Ver.0.9.9.8
