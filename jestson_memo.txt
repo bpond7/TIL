@@ -1,0 +1,27 @@
+sudo apt update
+sudo apt upgrade
+
+sudo apt install python-pip
+sudo -H pip install jetson-stats
+
+sudo sh ueye_4.93.0.986_arm64.run
+
+git config --global user.name bpond7
+git config --global user.email j_bluesky@hotmail.co.jp
+git config --global --list
+cd aowork/git/
+git init
+ssh-keygen -t rsa -C j_bluesky@hotmail.co.jp
+ssh-add -l
+less ~/.ssh/id_rsa.pub 
+ssh -T git@github.com
+git pull origin master
+git merge --allow-unrelated-histories origin/master
+git pull origin master
+
+sudo apt-get install libqt5gui5
+sudo apt-get install libqt5network5
+sudo apt-get install libjpeg62
+sudo apt-get install libpng16-16
+
+apt-get install libgstreamer1.0-0 gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav gstreamer1.0-doc gstreamer1.0-tools gstreamer1.0-x gstreamer1.0-alsa gstreamer1.0-gl gstreamer1.0-gtk3 gstreamer1.0-qt5 gstreamer1.0-pulseaudio
