@@ -1,0 +1,21 @@
+Using pixela
+
+see API doc
+https://docs.pixe.la/
+
+https://www.ikkitang1211.site/entry/2020/01/07/000403
+
+// make graph
+curl -X POST https://pixe.la/v1/users/bpond7/graphs -H 'X-USER-TOKEN:thisissecret' -d '{"id":"test-graph","name":"graph-name","unit":"count","type":"int","color":"sora","timezone":"Asia/Tokyo"}'
+
+// see graph
+https://pixe.la/v1/users/bpond7/graphs/test-graph
+
+// delete graph
+curl -X DELETE https://pixe.la/v1/users/bpond7/graphs/test-graph -H 'X-USER-TOKEN:thisissecret'
+
+// add value
+curl -X POST https://pixe.la/v1/users/bpond7/graphs/test-graph -H 'X-USER-TOKEN:thisissecret' -d '{"date":"20200128","quantity":"3"}'
+
+// increment value
+curl -X PUT https://pixe.la/v1/users/bpond7/graphs/test-graph/increment -H 'X-USER-TOKEN:thisissecret'

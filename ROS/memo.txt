@@ -1,0 +1,126 @@
+//ワークスペース作成
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws/
+cd src/
+catkin_init_workspace
+
+//gitフォークしてクローンしようとしたらなんかエラー
+fatal: Could not read from remote repository.
+http://tusukuru.hatenablog.com/entry/2018/08/29/021651
+
+ssh-keygen -t rsa -C j_bluesky@hotmail.co.jp
+ls ~/.ssh
+authorized_keys  id_rsa  id_rsa.pub  known_hosts
+
+less ~/.ssh/id_rsa.pub
+vim ~/.ssh/config
+ssh -T git@github.com
+Hi bpond7! You've successfully authenticated, but GitHub does not provide shell access.
+
+git clone git@github.com:bpond7/raspimouse_ros.git
+
+// byobu入れてみた
+sudo apt-get install byobu
+
+// LEGO-EV3
+https://qiita.com/haneuma/items/a301186d832beee639d0
+http://afrel.co.jp/archives/16530
+https://openrtm.org/openrtm/ja/doc/casestudy/lego_mindstorm/lego_sdcard_prep
+https://www.ev3dev.org/downloads/
+ーPC側準備
+OSイメージをダウンロード
+ダウンロードしたファイルを展開する
+SDカードを挿す
+イメージファイルの書き込み
+$ sudo dd if=ev3dev-stretch-ev3-generic-2019-10-23.img of=/dev/sdb bs=1M
+
+※dd: failed to open '/dev/sdb': No medium found
+が出たら、SDカード抜き差しする（アンマウントしない）
+
+1800+0 records in
+1800+0 records out
+1887436800 bytes (1.9 GB, 1.8 GiB) copied, 46.0408 s, 41.0 MB/s
+が出たら書き込み終了
+
+ーEV3側準備
+電源ケーブルを本体に挿す
+Wi-Fiドングルを本体に挿す
+SDカードを本体に挿す
+本体真ん中のボタンを押して、起動する
+メニュー画面が表示されたらOK
+Wi-Fiの設定はWebサイトの通り
+
+// LEGO-EV3 ssh login
+$ ssh robot@172.20.10.4
+pass maker
+
+apt-get がエラー
+http://yakushi.shinshu-u.ac.jp/robotics/?EV3　で別イメージを試す
+ただし、SDカードが抜けない！
+->ピンセットで抜けるようになった
+
+// GUI inst
+// xubuntu desktop install
+sudo apt-get install -y install xubuntu-desktop
+
+// ROS practice
+sudo apt-get install -y ros-melodic-joystick-drivers
+sudo apt-get install -y ros-melodic-image-proc
+
+// kame
+sudo apt-get install ros-melodic-turtlesim
+$ roscore
+$ rosrun turtlesim turtlesim_node
+
+// ワークスペース作成したら、bashを書き換えること
+vi ~/.bashrc
+source ~/.bashrc
+
+//rviz
+sudo apt-get install -y ros-melodic-urdf-tutorial
+check_urdf simple_body1.urdf 
+
+Command 'check_urdf' not found, but can be installed with:
+
+sudo apt install liburdfdom-tools
+
+// copy(folder)
+cp -r src dist
+
+//xacro
+rosrun xacro xacro basic1.xacro --inorder >basic1.urdf
+xacro: in-order processing became default in ROS Melodic. You can drop the option.
+
+rosrun xacro xacro basic1.xacro  >basic1.urdf
+OK
+
+//meld
+sudo apt-get install meld
+
+//xacro ex6
+//error
+roslaunch urdf_tutorial display.launch model:=basic6.xacro
+
+// ctrl+s
+ctrl+q
+stty -a -> stop=^S
+stty stop undef
+
+// joint publish  -ROS Turtorial No 16
+ERROR
+catkin make -> NG
+listener??
+
+//12/25 -ROS Turtorial No 52
+sudo apt-get install ros-melodic-roswww
+
+page not disp....
+
+->see https://qiita.com/yoneken/items/7e45ad3fcf8010ed98ed
+--> success!!
+
+//vscode + ROS
+https://opensource-robotics.tokyo.jp/?p=3018
+ 
+
+	

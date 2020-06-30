@@ -1,0 +1,8 @@
+// 環境構築
+https://qiita.com/aki34/items/6d5e4f5d6036b9bcd63e
+
+// ROSで手動インストールしたOpenCVが被ってしまって使えない問題
+https://qiita.com/MENDY/items/d61a23974a34e32
+import sys
+sys.path.remove('/opt/ros/kinetic/lib/python2.7/dist-packages')
+import cv2ce75d

@@ -1,0 +1,20 @@
+// ubuntu raspi usbcamera OK
+send
+gst-launch-1.0 v4l2src ! gdppay ! tcpserversink host=127.0.0.1 port=5555
+recv
+gst-launch-1.0 tcpclientsrc host=127.0.0.1 port=5555 ! gdpdepay ! autovideosink
+
+// udp version
+send
+gst-launch-1.0 v4l2src ! h264parse ! rtph264pay config-interval=10 pt=96 ! udpsink host=127.0.0.1 port=5555
+recv
+gst-launch-1.0 udpsrc port=5555 caps="application/x-rtp, media=(string)video, clock-rate=(int)90000, encoding-name=(string)H264" ! rtph264depay ! avdec_h264 ! videoconvert ! autovideosink sync=f
+
+// multicast
+send
+gst-launch-1.0 v4l2src ! h264parse ! rtph264pay config-interval=10 pt=96 ! udpsink host=239.0.0.10 auto-multicast=true port=5555
+recv
+gst-launch-1.0 udpsrc multicast-group=239.0.0.10 auto-multicast=true port=5555 caps="application/x-rtp, media=(string)video, clock-rate=(int)90000, encoding-name=(string)H264" ! rtph264depay ! avdec_h264 ! videoconvert ! autovideosink sync=f
+// recv2
+gst-launch-1.0 udpsrc multicast-group=224.0.0.100 auto-multicast=true port=50000 ! "application/x-rtp, media=(string)video, encoding-name=(string)H264" ! rtph264depay ! h264parse ! decodebin connection-speed=50000 ! autovideosink sync=FALSE
+

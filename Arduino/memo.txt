@@ -1,0 +1,12 @@
+// module
+https://www.arduino.cc/en/Main/Software
+Linux ARM 32 bits
+
+// install
+Extract Zip
+sudo ./install.sh
+./aruduino
+
+attention!
+My raspi uses 32bit os.
+Do not use module for 64bit. 
