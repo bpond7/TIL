@@ -6,8 +6,8 @@ sudo -H pip install jetson-stats
 
 sudo sh ueye_4.93.0.986_arm64.run
 
-git config --global user.name bpond7
-git config --global user.email j_bluesky@hotmail.co.jp
+git config --global user.name <name>
+git config --global user.email <mail>
 git config --global --list
 cd aowork/git/
 git init
