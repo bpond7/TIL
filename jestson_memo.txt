@@ -15,6 +15,8 @@ ssh-keygen -t rsa -C j_bluesky@hotmail.co.jp
 ssh-add -l
 less ~/.ssh/id_rsa.pub 
 ssh -T git@github.com
+
+git remote add origin git@github.com:bpond7/TIL.git
 git pull origin master
 git merge --allow-unrelated-histories origin/master
 git pull origin master
