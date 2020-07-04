@@ -32,6 +32,8 @@ sudo apt-get install v4l-utils
 
 sudo apt-get install byobu
 
+sudo apt install clang-10
+
 日本語入力のためには、ログイン時に歯車マークを押してUnityではなくUbuntuを選ぶ
 
 //visual studio code
