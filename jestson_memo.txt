@@ -42,3 +42,12 @@ sudo dpkg -i code-oss_1.32.3-arm64.deb
 
 起動は
 code-oss
+
+// include mruby
+$ sudo apt install build-essential
+$ sudo apt-get install rake
+$ git clone https://github.com/mruby/mruby.git
+$ make
+$ vim hello.c
+$ gcc -Iinclude hello.c build/host/lib/libmruby.a -lm -o hello.out
+# ./hello.out
