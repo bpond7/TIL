@@ -1,0 +1,1 @@
+cmd_/home/polaris/Desktop/aowork/TIL/CPP/linuxlearn/sample.ko := ld -EL -r  -T ./scripts/module-common.lds -T ./arch/arm64/kernel/module.lds --build-id  -o /home/polaris/Desktop/aowork/TIL/CPP/linuxlearn/sample.ko /home/polaris/Desktop/aowork/TIL/CPP/linuxlearn/sample.o /home/polaris/Desktop/aowork/TIL/CPP/linuxlearn/sample.mod.o ;  true
