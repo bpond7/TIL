@@ -90,91 +90,90 @@ static gboolean draw_cb (GtkWidget *widget, cairo_t *cr, CustomData *data) {
 /* This function is called when the slider changes its position. We perform a seek to the
  * new position here. */
 static void slider_cb (GtkRange *range, CustomData *data) {
-  gdouble value = gtk_range_get_value (GTK_RANGE (data->slider));
-  gst_element_seek_simple (data->playbin, GST_FORMAT_TIME, GST_SEEK_FLAG_FLUSH | GST_SEEK_FLAG_KEY_UNIT,
-      (gint64)(value * GST_SECOND));
+	gdouble value = gtk_range_get_value (GTK_RANGE (data->slider));
+	gst_element_seek_simple (data->playbin, GST_FORMAT_TIME, GST_SEEK_FLAG_FLUSH | GST_SEEK_FLAG_KEY_UNIT, (gint64)(value * GST_SECOND));
 }
 
 /* This creates all the GTK+ widgets that compose our application, and registers the callbacks */
 static void create_ui (CustomData *data) {
-  GtkWidget *main_window;  /* The uppermost window, containing all other windows */
-  GtkWidget *video_window; /* The drawing area where the video will be shown */
-  GtkWidget *main_box;     /* VBox to hold main_hbox and the controls */
-  GtkWidget *main_hbox;    /* HBox to hold the video_window and the stream info text widget */
-  GtkWidget *controls;     /* HBox to hold the buttons and the slider */
-  GtkWidget *play_button, *pause_button, *stop_button; /* Buttons */
+	GtkWidget *main_window;  /* The uppermost window, containing all other windows */
+	GtkWidget *video_window; /* The drawing area where the video will be shown */
+	GtkWidget *main_box;     /* VBox to hold main_hbox and the controls */
+	GtkWidget *main_hbox;    /* HBox to hold the video_window and the stream info text widget */
+	GtkWidget *controls;     /* HBox to hold the buttons and the slider */
+	GtkWidget *play_button, *pause_button, *stop_button; /* Buttons */
 
-  main_window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-  g_signal_connect (G_OBJECT (main_window), "delete-event", G_CALLBACK (delete_event_cb), data);
+	main_window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+	g_signal_connect (G_OBJECT (main_window), "delete-event", G_CALLBACK (delete_event_cb), data);
 
-  video_window = gtk_drawing_area_new ();
-  gtk_widget_set_double_buffered (video_window, FALSE);
-  g_signal_connect (video_window, "realize", G_CALLBACK (realize_cb), data);
-  g_signal_connect (video_window, "draw", G_CALLBACK (draw_cb), data);
+	video_window = gtk_drawing_area_new ();
+	gtk_widget_set_double_buffered (video_window, FALSE);
+	g_signal_connect (video_window, "realize", G_CALLBACK (realize_cb), data);
+	g_signal_connect (video_window, "draw", G_CALLBACK (draw_cb), data);
 
-  play_button = gtk_button_new_from_icon_name ("media-playback-start", GTK_ICON_SIZE_SMALL_TOOLBAR);
-  g_signal_connect (G_OBJECT (play_button), "clicked", G_CALLBACK (play_cb), data);
+	play_button = gtk_button_new_from_icon_name ("media-playback-start", GTK_ICON_SIZE_SMALL_TOOLBAR);
+	g_signal_connect (G_OBJECT (play_button), "clicked", G_CALLBACK (play_cb), data);
 
-  pause_button = gtk_button_new_from_icon_name ("media-playback-pause", GTK_ICON_SIZE_SMALL_TOOLBAR);
-  g_signal_connect (G_OBJECT (pause_button), "clicked", G_CALLBACK (pause_cb), data);
+	pause_button = gtk_button_new_from_icon_name ("media-playback-pause", GTK_ICON_SIZE_SMALL_TOOLBAR);
+	g_signal_connect (G_OBJECT (pause_button), "clicked", G_CALLBACK (pause_cb), data);
 
-  stop_button = gtk_button_new_from_icon_name ("media-playback-stop", GTK_ICON_SIZE_SMALL_TOOLBAR);
-  g_signal_connect (G_OBJECT (stop_button), "clicked", G_CALLBACK (stop_cb), data);
+	stop_button = gtk_button_new_from_icon_name ("media-playback-stop", GTK_ICON_SIZE_SMALL_TOOLBAR);
+	g_signal_connect (G_OBJECT (stop_button), "clicked", G_CALLBACK (stop_cb), data);
 
-  data->slider = gtk_scale_new_with_range (GTK_ORIENTATION_HORIZONTAL, 0, 100, 1);
-  gtk_scale_set_draw_value (GTK_SCALE (data->slider), 0);
-  data->slider_update_signal_id = g_signal_connect (G_OBJECT (data->slider), "value-changed", G_CALLBACK (slider_cb), data);
+	data->slider = gtk_scale_new_with_range (GTK_ORIENTATION_HORIZONTAL, 0, 100, 1);
+	gtk_scale_set_draw_value (GTK_SCALE (data->slider), 0);
+	data->slider_update_signal_id = g_signal_connect (G_OBJECT (data->slider), "value-changed", G_CALLBACK (slider_cb), data);
 
-  data->streams_list = gtk_text_view_new ();
-  gtk_text_view_set_editable (GTK_TEXT_VIEW (data->streams_list), FALSE);
+	data->streams_list = gtk_text_view_new ();
+	gtk_text_view_set_editable (GTK_TEXT_VIEW (data->streams_list), FALSE);
 
-  controls = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-  gtk_box_pack_start (GTK_BOX (controls), play_button, FALSE, FALSE, 2);
-  gtk_box_pack_start (GTK_BOX (controls), pause_button, FALSE, FALSE, 2);
-  gtk_box_pack_start (GTK_BOX (controls), stop_button, FALSE, FALSE, 2);
-  gtk_box_pack_start (GTK_BOX (controls), data->slider, TRUE, TRUE, 2);
+	controls = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+	gtk_box_pack_start (GTK_BOX (controls), play_button, FALSE, FALSE, 2);
+	gtk_box_pack_start (GTK_BOX (controls), pause_button, FALSE, FALSE, 2);
+	gtk_box_pack_start (GTK_BOX (controls), stop_button, FALSE, FALSE, 2);
+	gtk_box_pack_start (GTK_BOX (controls), data->slider, TRUE, TRUE, 2);
 
-  main_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-  gtk_box_pack_start (GTK_BOX (main_hbox), video_window, TRUE, TRUE, 0);
-  gtk_box_pack_start (GTK_BOX (main_hbox), data->streams_list, FALSE, FALSE, 2);
+	main_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+	gtk_box_pack_start (GTK_BOX (main_hbox), video_window, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (main_hbox), data->streams_list, FALSE, FALSE, 2);
 
-  main_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-  gtk_box_pack_start (GTK_BOX (main_box), main_hbox, TRUE, TRUE, 0);
-  gtk_box_pack_start (GTK_BOX (main_box), controls, FALSE, FALSE, 0);
-  gtk_container_add (GTK_CONTAINER (main_window), main_box);
-  gtk_window_set_default_size (GTK_WINDOW (main_window), 640, 480);
+	main_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+	gtk_box_pack_start (GTK_BOX (main_box), main_hbox, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (main_box), controls, FALSE, FALSE, 0);
+	gtk_container_add (GTK_CONTAINER (main_window), main_box);
+	gtk_window_set_default_size (GTK_WINDOW (main_window), 640, 480);
 
-  gtk_widget_show_all (main_window);
+	gtk_widget_show_all (main_window);
 }
 
 /* This function is called periodically to refresh the GUI */
 static gboolean refresh_ui (CustomData *data) {
-  gint64 current = -1;
+	gint64 current = -1;
 
-  /* We do not want to update anything unless we are in the PAUSED or PLAYING states */
-  if (data->state < GST_STATE_PAUSED)
-    return TRUE;
+	/* We do not want to update anything unless we are in the PAUSED or PLAYING states */
+	if (data->state < GST_STATE_PAUSED)
+		return TRUE;
 
-  /* If we didn't know it yet, query the stream duration */
-  if (!GST_CLOCK_TIME_IS_VALID (data->duration)) {
-    if (!gst_element_query_duration (data->playbin, GST_FORMAT_TIME, &data->duration)) {
-      g_printerr ("Could not query current duration.\n");
-    } else {
-      /* Set the range of the slider to the clip duration, in SECONDS */
-      gtk_range_set_range (GTK_RANGE (data->slider), 0, (gdouble)data->duration / GST_SECOND);
-    }
-  }
+	/* If we didn't know it yet, query the stream duration */
+	if (!GST_CLOCK_TIME_IS_VALID (data->duration)) {
+		if (!gst_element_query_duration (data->playbin, GST_FORMAT_TIME, &data->duration)) {
+			g_printerr ("Could not query current duration.\n");
+		} else {
+      		/* Set the range of the slider to the clip duration, in SECONDS */
+			gtk_range_set_range (GTK_RANGE (data->slider), 0, (gdouble)data->duration / GST_SECOND);
+ 		}
+	}
 
-  if (gst_element_query_position (data->playbin, GST_FORMAT_TIME, &current)) {
-    /* Block the "value-changed" signal, so the slider_cb function is not called
-     * (which would trigger a seek the user has not requested) */
-    g_signal_handler_block (data->slider, data->slider_update_signal_id);
-    /* Set the position of the slider to the current pipeline positoin, in SECONDS */
-    gtk_range_set_value (GTK_RANGE (data->slider), (gdouble)current / GST_SECOND);
-    /* Re-enable the signal */
-    g_signal_handler_unblock (data->slider, data->slider_update_signal_id);
-  }
-  return TRUE;
+	if (gst_element_query_position (data->playbin, GST_FORMAT_TIME, &current)) {
+		/* Block the "value-changed" signal, so the slider_cb function is not called
+		 * * (which would trigger a seek the user has not requested) */
+		g_signal_handler_block (data->slider, data->slider_update_signal_id);
+		/* Set the position of the slider to the current pipeline positoin, in SECONDS */
+		gtk_range_set_value (GTK_RANGE (data->slider), (gdouble)current / GST_SECOND);
+		/* Re-enable the signal */
+		g_signal_handler_unblock (data->slider, data->slider_update_signal_id);
+	}
+	return TRUE;
 }
 
 /* This function is called when new metadata is discovered in the stream */
