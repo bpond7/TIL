@@ -178,203 +178,202 @@ static gboolean refresh_ui (CustomData *data) {
 
 /* This function is called when new metadata is discovered in the stream */
 static void tags_cb (GstElement *playbin, gint stream, CustomData *data) {
-  /* We are possibly in a GStreamer working thread, so we notify the main
-   * thread of this event through a message in the bus */
-  gst_element_post_message (playbin,
-    gst_message_new_application (GST_OBJECT (playbin),
-      gst_structure_new_empty ("tags-changed")));
+	/* We are possibly in a GStreamer working thread, so we notify the main
+	 * * thread of this event through a message in the bus */
+	gst_element_post_message (playbin, gst_message_new_application (GST_OBJECT (playbin), gst_structure_new_empty ("tags-changed")));
 }
 
 /* This function is called when an error message is posted on the bus */
 static void error_cb (GstBus *bus, GstMessage *msg, CustomData *data) {
-  GError *err;
-  gchar *debug_info;
+	GError *err;
+	gchar *debug_info;
 
-  /* Print error details on the screen */
-  gst_message_parse_error (msg, &err, &debug_info);
-  g_printerr ("Error received from element %s: %s\n", GST_OBJECT_NAME (msg->src), err->message);
-  g_printerr ("Debugging information: %s\n", debug_info ? debug_info : "none");
-  g_clear_error (&err);
-  g_free (debug_info);
+	/* Print error details on the screen */
+	gst_message_parse_error (msg, &err, &debug_info);
+	g_printerr ("Error received from element %s: %s\n", GST_OBJECT_NAME (msg->src), err->message);
+	g_printerr ("Debugging information: %s\n", debug_info ? debug_info : "none");
+	g_clear_error (&err);
+	g_free (debug_info);
 
-  /* Set the pipeline to READY (which stops playback) */
-  gst_element_set_state (data->playbin, GST_STATE_READY);
+	/* Set the pipeline to READY (which stops playback) */
+	gst_element_set_state (data->playbin, GST_STATE_READY);
 }
 
 /* This function is called when an End-Of-Stream message is posted on the bus.
  * We just set the pipeline to READY (which stops playback) */
 static void eos_cb (GstBus *bus, GstMessage *msg, CustomData *data) {
-  g_print ("End-Of-Stream reached.\n");
-  gst_element_set_state (data->playbin, GST_STATE_READY);
+	g_print ("End-Of-Stream reached.\n");
+	gst_element_set_state (data->playbin, GST_STATE_READY);
 }
 
 /* This function is called when the pipeline changes states. We use it to
  * keep track of the current state. */
 static void state_changed_cb (GstBus *bus, GstMessage *msg, CustomData *data) {
-  GstState old_state, new_state, pending_state;
-  gst_message_parse_state_changed (msg, &old_state, &new_state, &pending_state);
-  if (GST_MESSAGE_SRC (msg) == GST_OBJECT (data->playbin)) {
-    data->state = new_state;
-    g_print ("State set to %s\n", gst_element_state_get_name (new_state));
-    if (old_state == GST_STATE_READY && new_state == GST_STATE_PAUSED) {
-      /* For extra responsiveness, we refresh the GUI as soon as we reach the PAUSED state */
-      refresh_ui (data);
-    }
-  }
+	GstState old_state, new_state, pending_state;
+	gst_message_parse_state_changed (msg, &old_state, &new_state, &pending_state);
+	if (GST_MESSAGE_SRC (msg) == GST_OBJECT (data->playbin)) {
+		data->state = new_state;
+		g_print ("State set to %s\n", gst_element_state_get_name (new_state));
+		if (old_state == GST_STATE_READY && new_state == GST_STATE_PAUSED) {
+			/* For extra responsiveness, we refresh the GUI as soon as we reach the PAUSED state */
+			refresh_ui (data);
+		}
+	}
 }
 
 /* Extract metadata from all the streams and write it to the text widget in the GUI */
 static void analyze_streams (CustomData *data) {
-  gint i;
-  GstTagList *tags;
-  gchar *str, *total_str;
-  guint rate;
-  gint n_video, n_audio, n_text;
-  GtkTextBuffer *text;
+	gint i;
+	GstTagList *tags;
+	gchar *str, *total_str;
+	guint rate;
+	gint n_video, n_audio, n_text;
+	GtkTextBuffer *text;
 
-  /* Clean current contents of the widget */
-  text = gtk_text_view_get_buffer (GTK_TEXT_VIEW (data->streams_list));
-  gtk_text_buffer_set_text (text, "", -1);
+	/* Clean current contents of the widget */
+	text = gtk_text_view_get_buffer (GTK_TEXT_VIEW (data->streams_list));
+	gtk_text_buffer_set_text (text, "", -1);
 
-  /* Read some properties */
-  g_object_get (data->playbin, "n-video", &n_video, NULL);
-  g_object_get (data->playbin, "n-audio", &n_audio, NULL);
-  g_object_get (data->playbin, "n-text", &n_text, NULL);
+	/* Read some properties */
+	g_object_get (data->playbin, "n-video", &n_video, NULL);
+	g_object_get (data->playbin, "n-audio", &n_audio, NULL);
+	g_object_get (data->playbin, "n-text", &n_text, NULL);
 
-  for (i = 0; i < n_video; i++) {
-    tags = NULL;
-    /* Retrieve the stream's video tags */
-    g_signal_emit_by_name (data->playbin, "get-video-tags", i, &tags);
-    if (tags) {
-      total_str = g_strdup_printf ("video stream %d:\n", i);
-      gtk_text_buffer_insert_at_cursor (text, total_str, -1);
-      g_free (total_str);
-      gst_tag_list_get_string (tags, GST_TAG_VIDEO_CODEC, &str);
-      total_str = g_strdup_printf ("  codec: %s\n", str ? str : "unknown");
-      gtk_text_buffer_insert_at_cursor (text, total_str, -1);
-      g_free (total_str);
-      g_free (str);
-      gst_tag_list_free (tags);
-    }
-  }
+	for (i = 0; i < n_video; i++) {
+		tags = NULL;
+		/* Retrieve the stream's video tags */
+		g_signal_emit_by_name (data->playbin, "get-video-tags", i, &tags);
+		if (tags) {
+			total_str = g_strdup_printf ("video stream %d:\n", i);
+			gtk_text_buffer_insert_at_cursor (text, total_str, -1);
+			g_free (total_str);
+			gst_tag_list_get_string (tags, GST_TAG_VIDEO_CODEC, &str);
+			total_str = g_strdup_printf ("  codec: %s\n", str ? str : "unknown");
+			gtk_text_buffer_insert_at_cursor (text, total_str, -1);
+			g_free (total_str);
+			g_free (str);
+			gst_tag_list_free (tags);
+		}
+	}
 
-  for (i = 0; i < n_audio; i++) {
-    tags = NULL;
-    /* Retrieve the stream's audio tags */
-    g_signal_emit_by_name (data->playbin, "get-audio-tags", i, &tags);
-    if (tags) {
-      total_str = g_strdup_printf ("\naudio stream %d:\n", i);
-      gtk_text_buffer_insert_at_cursor (text, total_str, -1);
-      g_free (total_str);
-      if (gst_tag_list_get_string (tags, GST_TAG_AUDIO_CODEC, &str)) {
-        total_str = g_strdup_printf ("  codec: %s\n", str);
-        gtk_text_buffer_insert_at_cursor (text, total_str, -1);
-        g_free (total_str);
-        g_free (str);
-      }
-      if (gst_tag_list_get_string (tags, GST_TAG_LANGUAGE_CODE, &str)) {
-        total_str = g_strdup_printf ("  language: %s\n", str);
-        gtk_text_buffer_insert_at_cursor (text, total_str, -1);
-        g_free (total_str);
-        g_free (str);
-      }
-      if (gst_tag_list_get_uint (tags, GST_TAG_BITRATE, &rate)) {
-        total_str = g_strdup_printf ("  bitrate: %d\n", rate);
-        gtk_text_buffer_insert_at_cursor (text, total_str, -1);
-        g_free (total_str);
-      }
-      gst_tag_list_free (tags);
-    }
-  }
+	for (i = 0; i < n_audio; i++) {
+		tags = NULL;
+		/* Retrieve the stream's audio tags */
+		g_signal_emit_by_name (data->playbin, "get-audio-tags", i, &tags);
+		if (tags) {
+			total_str = g_strdup_printf ("\naudio stream %d:\n", i);
+			gtk_text_buffer_insert_at_cursor (text, total_str, -1);
+			g_free (total_str);
+			if (gst_tag_list_get_string (tags, GST_TAG_AUDIO_CODEC, &str)) {
+				total_str = g_strdup_printf ("  codec: %s\n", str);
+				gtk_text_buffer_insert_at_cursor (text, total_str, -1);
+				g_free (total_str);
+				g_free (str);
+			}
+			if (gst_tag_list_get_string (tags, GST_TAG_LANGUAGE_CODE, &str)) {
+				total_str = g_strdup_printf ("  language: %s\n", str);
+				gtk_text_buffer_insert_at_cursor (text, total_str, -1);
+				g_free (total_str);
+				g_free (str);
+			}
+			if (gst_tag_list_get_uint (tags, GST_TAG_BITRATE, &rate)) {
+				total_str = g_strdup_printf ("  bitrate: %d\n", rate);
+				gtk_text_buffer_insert_at_cursor (text, total_str, -1);
+				g_free (total_str);
+			}
+			gst_tag_list_free (tags);
+		}
+	}
 
-  for (i = 0; i < n_text; i++) {
-    tags = NULL;
-    /* Retrieve the stream's subtitle tags */
-    g_signal_emit_by_name (data->playbin, "get-text-tags", i, &tags);
-    if (tags) {
-      total_str = g_strdup_printf ("\nsubtitle stream %d:\n", i);
-      gtk_text_buffer_insert_at_cursor (text, total_str, -1);
-      g_free (total_str);
-      if (gst_tag_list_get_string (tags, GST_TAG_LANGUAGE_CODE, &str)) {
-        total_str = g_strdup_printf ("  language: %s\n", str);
-        gtk_text_buffer_insert_at_cursor (text, total_str, -1);
-        g_free (total_str);
-        g_free (str);
-      }
-      gst_tag_list_free (tags);
-    }
-  }
+	for (i = 0; i < n_text; i++) {
+		tags = NULL;
+		/* Retrieve the stream's subtitle tags */
+		g_signal_emit_by_name (data->playbin, "get-text-tags", i, &tags);
+		if (tags) {
+			total_str = g_strdup_printf ("\nsubtitle stream %d:\n", i);
+			gtk_text_buffer_insert_at_cursor (text, total_str, -1);
+			g_free (total_str);
+			if (gst_tag_list_get_string (tags, GST_TAG_LANGUAGE_CODE, &str)) {
+				total_str = g_strdup_printf ("  language: %s\n", str);
+				gtk_text_buffer_insert_at_cursor (text, total_str, -1);
+				g_free (total_str);
+				g_free (str);
+			}
+			gst_tag_list_free (tags);
+		}
+	}
 }
 
 /* This function is called when an "application" message is posted on the bus.
  * Here we retrieve the message posted by the tags_cb callback */
 static void application_cb (GstBus *bus, GstMessage *msg, CustomData *data) {
-  if (g_strcmp0 (gst_structure_get_name (gst_message_get_structure (msg)), "tags-changed") == 0) {
-    /* If the message is the "tags-changed" (only one we are currently issuing), update
-     * the stream info GUI */
-    analyze_streams (data);
-  }
+	if (g_strcmp0 (gst_structure_get_name (gst_message_get_structure (msg)), "tags-changed") == 0) {
+		/* If the message is the "tags-changed" (only one we are currently issuing), update
+		 * * the stream info GUI */
+		analyze_streams (data);
+	}
 }
 
 int main(int argc, char *argv[]) {
-  CustomData data;
-  GstStateChangeReturn ret;
-  GstBus *bus;
+	CustomData data;
+	GstStateChangeReturn ret;
+	GstBus *bus;
 
-  /* Initialize GTK */
-  gtk_init (&argc, &argv);
+	/* Initialize GTK */
+	gtk_init (&argc, &argv);
 
-  /* Initialize GStreamer */
-  gst_init (&argc, &argv);
+	/* Initialize GStreamer */
+	gst_init (&argc, &argv);
 
-  /* Initialize our data structure */
-  memset (&data, 0, sizeof (data));
-  data.duration = GST_CLOCK_TIME_NONE;
+	/* Initialize our data structure */
+	memset (&data, 0, sizeof (data));
+	data.duration = GST_CLOCK_TIME_NONE;
 
-  /* Create the elements */
-  data.playbin = gst_element_factory_make ("playbin", "playbin");
+	/* Create the elements */
+	data.playbin = gst_element_factory_make ("playbin", "playbin");
 
-  if (!data.playbin) {
-    g_printerr ("Not all elements could be created.\n");
-    return -1;
-  }
+	if (!data.playbin) {
+		g_printerr ("Not all elements could be created.\n");
+		return -1;
+	}
 
-  /* Set the URI to play */
-  g_object_set (data.playbin, "uri", "https://www.freedesktop.org/software/gstreamer-sdk/data/media/sintel_trailer-480p.webm", NULL);
+	/* Set the URI to play */
+	g_object_set (data.playbin, "uri", "https://www.freedesktop.org/software/gstreamer-sdk/data/media/sintel_trailer-480p.webm", NULL);
 
-  /* Connect to interesting signals in playbin */
-  g_signal_connect (G_OBJECT (data.playbin), "video-tags-changed", (GCallback) tags_cb, &data);
-  g_signal_connect (G_OBJECT (data.playbin), "audio-tags-changed", (GCallback) tags_cb, &data);
-  g_signal_connect (G_OBJECT (data.playbin), "text-tags-changed", (GCallback) tags_cb, &data);
+	/* Connect to interesting signals in playbin */
+	g_signal_connect (G_OBJECT (data.playbin), "video-tags-changed", (GCallback) tags_cb, &data);
+	g_signal_connect (G_OBJECT (data.playbin), "audio-tags-changed", (GCallback) tags_cb, &data);
+	g_signal_connect (G_OBJECT (data.playbin), "text-tags-changed", (GCallback) tags_cb, &data);
 
-  /* Create the GUI */
-  create_ui (&data);
+	/* Create the GUI */
+	create_ui (&data);
 
-  /* Instruct the bus to emit signals for each received message, and connect to the interesting signals */
-  bus = gst_element_get_bus (data.playbin);
-  gst_bus_add_signal_watch (bus);
-  g_signal_connect (G_OBJECT (bus), "message::error", (GCallback)error_cb, &data);
-  g_signal_connect (G_OBJECT (bus), "message::eos", (GCallback)eos_cb, &data);
-  g_signal_connect (G_OBJECT (bus), "message::state-changed", (GCallback)state_changed_cb, &data);
-  g_signal_connect (G_OBJECT (bus), "message::application", (GCallback)application_cb, &data);
-  gst_object_unref (bus);
+	/* Instruct the bus to emit signals for each received message, and connect to the interesting signals */
+	bus = gst_element_get_bus (data.playbin);
+	gst_bus_add_signal_watch (bus);
+	g_signal_connect (G_OBJECT (bus), "message::error", (GCallback)error_cb, &data);
+	g_signal_connect (G_OBJECT (bus), "message::eos", (GCallback)eos_cb, &data);
+	g_signal_connect (G_OBJECT (bus), "message::state-changed", (GCallback)state_changed_cb, &data);
+	g_signal_connect (G_OBJECT (bus), "message::application", (GCallback)application_cb, &data);
+	gst_object_unref (bus);
 
-  /* Start playing */
-  ret = gst_element_set_state (data.playbin, GST_STATE_PLAYING);
-  if (ret == GST_STATE_CHANGE_FAILURE) {
-    g_printerr ("Unable to set the pipeline to the playing state.\n");
-    gst_object_unref (data.playbin);
-    return -1;
-  }
+	/* Start playing */
+	ret = gst_element_set_state (data.playbin, GST_STATE_PLAYING);
+	if (ret == GST_STATE_CHANGE_FAILURE) {
+		g_printerr ("Unable to set the pipeline to the playing state.\n");
+		gst_object_unref (data.playbin);
+		return -1;
+	}
 
-  /* Register a function that GLib will call every second */
-  g_timeout_add_seconds (1, (GSourceFunc)refresh_ui, &data);
+	/* Register a function that GLib will call every second */
+	g_timeout_add_seconds (1, (GSourceFunc)refresh_ui, &data);
 
-  /* Start the GTK main loop. We will not regain control until gtk_main_quit is called. */
-  gtk_main ();
+	/* Start the GTK main loop. We will not regain control until gtk_main_quit is called. */
+	gtk_main ();
 
-  /* Free resources */
-  gst_element_set_state (data.playbin, GST_STATE_NULL);
-  gst_object_unref (data.playbin);
-  return 0;
+	/* Free resources */
+	gst_element_set_state (data.playbin, GST_STATE_NULL);
+	gst_object_unref (data.playbin);
+	
+	return 0;
 }
